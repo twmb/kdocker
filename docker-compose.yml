@@ -1,0 +1,140 @@
+version: "3.7"
+services:
+  zookeeper:
+    image: twmb:zk-3.7.0
+    network_mode: host
+
+  kafka-1:
+    image: twmb:kafka-2.13-3.0.0
+    depends_on:
+      - zookeeper
+    network_mode: host
+    environment:
+      KPROP_BROKER_ID: 1
+      KPROP_LISTENERS: 'PLAINTEXT://localhost:9092,SASL_PLAINTEXT://localhost:9093'
+      KPROP_SASL_ENABLED_MECHANISMS: 'PLAIN,SCRAM-SHA-256,SCRAM-SHA-512'
+      KPROP_DELEGATION_TOKEN_MASTER_KEY: 'super_secret'
+      KPROP_SUPER_USERS: 'User:ANONYMOUS;User:adminscram;User:adminplain'
+      KPROP_AUTHORIZER_CLASS_NAME: 'kafka.security.authorizer.AclAuthorizer'
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/kafka/config/kafka_server_jaas.conf"
+    volumes:
+      - type: bind
+        source: ${PWD}/kcfg/kafka_server_jaas.conf
+        target: /kafka/config/kafka_server_jaas.conf
+        read_only: true
+      - type: bind
+        source: ${PWD}/kcfg/log4j.properties
+        target: /kafka/config/log4j.properties
+        read_only: true
+      - type: bind
+        source: ${PWD}/kcfg/setup.sh
+        target: /kafka/setup.sh
+        read_only: true
+
+  kafka-2:
+    image: twmb:kafka-2.13-3.0.0
+    depends_on:
+      - zookeeper
+    network_mode: host
+    environment:
+      KPROP_BROKER_ID: 2
+      KPROP_LISTENERS: 'PLAINTEXT://localhost:9094,SASL_PLAINTEXT://localhost:9095'
+      KPROP_SASL_ENABLED_MECHANISMS: 'PLAIN,SCRAM-SHA-256,SCRAM-SHA-512'
+      KPROP_DELEGATION_TOKEN_MASTER_KEY: 'super_secret'
+      KPROP_SUPER_USERS: 'User:ANONYMOUS;User:adminscram;User:adminplain'
+      KPROP_AUTHORIZER_CLASS_NAME: 'kafka.security.authorizer.AclAuthorizer'
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/kafka/config/kafka_server_jaas.conf"
+    volumes:
+      - type: bind
+        source: ${PWD}/kcfg/kafka_server_jaas.conf
+        target: /kafka/config/kafka_server_jaas.conf
+        read_only: true
+      - type: bind
+        source: ${PWD}/kcfg/log4j.properties
+        target: /kafka/config/log4j.properties
+        read_only: true
+      - type: bind
+        source: ${PWD}/kcfg/setup.sh
+        target: /kafka/setup.sh
+        read_only: true
+
+  kafka-3:
+    image: twmb:kafka-2.13-3.0.0
+    depends_on:
+      - zookeeper
+    network_mode: host
+    environment:
+      KPROP_BROKER_ID: 3
+      KPROP_LISTENERS: 'PLAINTEXT://localhost:9096,SASL_PLAINTEXT://localhost:9097'
+      KPROP_SASL_ENABLED_MECHANISMS: 'PLAIN,SCRAM-SHA-256,SCRAM-SHA-512'
+      KPROP_DELEGATION_TOKEN_MASTER_KEY: 'super_secret'
+      KPROP_SUPER_USERS: 'User:ANONYMOUS;User:adminscram;User:adminplain'
+      KPROP_AUTHORIZER_CLASS_NAME: 'kafka.security.authorizer.AclAuthorizer'
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/kafka/config/kafka_server_jaas.conf"
+    volumes:
+      - type: bind
+        source: ${PWD}/kcfg/kafka_server_jaas.conf
+        target: /kafka/config/kafka_server_jaas.conf
+        read_only: true
+      - type: bind
+        source: ${PWD}/kcfg/log4j.properties
+        target: /kafka/config/log4j.properties
+        read_only: true
+      - type: bind
+        source: ${PWD}/kcfg/setup.sh
+        target: /kafka/setup.sh
+        read_only: true
+
+#  kafka-4:
+#    image: twmb:kafka-2.13-3.0.0
+#    depends_on:
+#      - zookeeper
+#    network_mode: host
+#    environment:
+#      KPROP_BROKER_ID: 4
+#      KPROP_LISTENERS: 'PLAINTEXT://localhost:9098,SASL_PLAINTEXT://localhost:9099'
+#      KPROP_SASL_ENABLED_MECHANISMS: 'PLAIN,SCRAM-SHA-256,SCRAM-SHA-512'
+#      KPROP_DELEGATION_TOKEN_MASTER_KEY: 'super_secret'
+#      KPROP_SUPER_USERS: 'User:ANONYMOUS;User:adminscram;User:adminplain'
+#      KPROP_AUTHORIZER_CLASS_NAME: 'kafka.security.authorizer.AclAuthorizer'
+#      KAFKA_OPTS: "-Djava.security.auth.login.config=/kafka/config/kafka_server_jaas.conf"
+#    volumes:
+#      - type: bind
+#        source: ${PWD}/kcfg/kafka_server_jaas.conf
+#        target: /kafka/config/kafka_server_jaas.conf
+#        read_only: true
+#      - type: bind
+#        source: ${PWD}/kcfg/log4j.properties
+#        target: /kafka/config/log4j.properties
+#        read_only: true
+#      - type: bind
+#        source: ${PWD}/kcfg/setup.sh
+#        target: /kafka/setup.sh
+#        read_only: true
+#
+#  kafka-5:
+#    image: twmb:kafka-2.13-3.0.0
+#    depends_on:
+#      - zookeeper
+#    network_mode: host
+#    environment:
+#      KPROP_BROKER_ID: 5
+#      KPROP_LISTENERS: 'PLAINTEXT://localhost:9090,SASL_PLAINTEXT://localhost:9091'
+#      KPROP_SASL_ENABLED_MECHANISMS: 'PLAIN,SCRAM-SHA-256,SCRAM-SHA-512'
+#      KPROP_DELEGATION_TOKEN_MASTER_KEY: 'super_secret'
+#      KPROP_SUPER_USERS: 'User:ANONYMOUS;User:adminscram;User:adminplain'
+#      KPROP_AUTHORIZER_CLASS_NAME: 'kafka.security.authorizer.AclAuthorizer'
+#      KAFKA_OPTS: "-Djava.security.auth.login.config=/kafka/config/kafka_server_jaas.conf"
+#    volumes:
+#      - type: bind
+#        source: ${PWD}/kcfg/kafka_server_jaas.conf
+#        target: /kafka/config/kafka_server_jaas.conf
+#        read_only: true
+#      - type: bind
+#        source: ${PWD}/kcfg/log4j.properties
+#        target: /kafka/config/log4j.properties
+#        read_only: true
+#      - type: bind
+#        source: ${PWD}/kcfg/setup.sh
+#        target: /kafka/setup.sh
+#        read_only: true
