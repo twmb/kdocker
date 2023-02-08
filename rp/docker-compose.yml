@@ -22,7 +22,7 @@ services:
       - --advertise-kafka-addr=localhost:9092
       - --rpc-addr=0.0.0.0:33145
       - --advertise-rpc-addr=localhost:33145
-    image: docker.vectorized.io/vectorized/redpanda:latest
+    image: vectorized/redpanda-nightly:latest
 
   redpanda-1:
     privileged: true
@@ -49,7 +49,7 @@ services:
       - --rpc-addr=0.0.0.0:33146
       - --advertise-rpc-addr=localhost:33146
       - --seeds="localhost:33145"
-    image: docker.vectorized.io/vectorized/redpanda:latest
+    image: vectorized/redpanda-nightly:latest
 
   redpanda-2:
     privileged: true
@@ -76,7 +76,7 @@ services:
       - --rpc-addr=0.0.0.0:33147
       - --advertise-rpc-addr=localhost:33147
       - --seeds="localhost:33145"
-    image: docker.vectorized.io/vectorized/redpanda:latest
+    image: vectorized/redpanda-nightly:latest
 
     #  redpanda-3:
     #    privileged: true
@@ -95,11 +95,11 @@ services:
     #      - --overprovisioned
     #      - --node-id=3
     #      - --check=false
-    #      - --schema-registry-addr=0.0.0.0:8075
-    #      - --pandaproxy-addr=0.0.0.0:8085
-    #      - --advertise-pandaproxy-addr=localhost:8085
-    #      - --kafka-addr=0.0.0.0:9095
-    #      - --advertise-kafka-addr=localhost:9095
+    #      - --schema-registry-addr=0.0.0.0:8078
+    #      - --pandaproxy-addr=0.0.0.0:8088
+    #      - --advertise-pandaproxy-addr=localhost:8088
+    #      - --kafka-addr=0.0.0.0:9098
+    #      - --advertise-kafka-addr=localhost:9098
     #      - --rpc-addr=0.0.0.0:33148
     #      - --advertise-rpc-addr=localhost:33148
     #      - --seeds="localhost:33145"
@@ -122,11 +122,11 @@ services:
     #      - --overprovisioned
     #      - --node-id=4
     #      - --check=false
-    #      - --schema-registry-addr=0.0.0.0:8076
-    #      - --pandaproxy-addr=0.0.0.0:8086
-    #      - --advertise-pandaproxy-addr=localhost:8086
-    #      - --kafka-addr=0.0.0.0:9096
-    #      - --advertise-kafka-addr=localhost:9096
+    #      - --schema-registry-addr=0.0.0.0:8079
+    #      - --pandaproxy-addr=0.0.0.0:8089
+    #      - --advertise-pandaproxy-addr=localhost:8089
+    #      - --kafka-addr=0.0.0.0:9099
+    #      - --advertise-kafka-addr=localhost:9099
     #      - --rpc-addr=0.0.0.0:33149
     #      - --advertise-rpc-addr=localhost:33149
     #      - --seeds="localhost:33145"
