@@ -1,10 +1,10 @@
 ARG OPENJDK=11-jre-slim
 FROM openjdk:${OPENJDK}
 
-ARG ZK_DL_DIR=zookeeper-3.7.0
-ARG ZK_DL_FILE=apache-zookeeper-3.7.0-bin
+ARG ZK_DL_DIR=zookeeper-3.8.0
+ARG ZK_DL_FILE=apache-zookeeper-3.8.0-bin
 ARG ZK_SHA_CMD=sha512sum
-ARG ZK_DL_SHA=64e2701c019ed46f45f4d53b2c5eaeaf7cf48c342bbafa032a0819d527fc77caebfada6bdad34e5171e6d838f40b16c95b62ce378b53dfc827af2d60cec0b17c
+ARG ZK_DL_SHA=d66e3a40451f840406901b2cd940992b001f92049a372ae48d8b420891605871cd1ae5f6cceb3b10665491e7abef36a4078dace158bd1e0938fcd3567b5234ca
 
 # netcat exists for allowing healthchecks with
 # echo ruok | nc -w 1 127.0.0.1 2181 | grep imok
