@@ -1,0 +1,84 @@
+services:
+
+  kafka1:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka1
+    network_mode: host
+    environment:
+      # KRaft Configuration
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@127.0.0.1:9093,2@127.0.0.1:9095,3@127.0.0.1:9097
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM1Tk
+
+      # Network Configuration  
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+
+      # Storage Configuration
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+
+      # Topic Configuration
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+
+
+  kafka2:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka2
+    network_mode: host
+    environment:
+      # KRaft Configuration
+      KAFKA_NODE_ID: 2
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@127.0.0.1:9093,2@127.0.0.1:9095,3@127.0.0.1:9097
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM1Tk
+
+      # Network Configuration  
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9094,CONTROLLER://0.0.0.0:9095
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9094
+
+      # Storage Configuration
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+
+      # Topic Configuration
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+
+
+  kafka3:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka3
+    network_mode: host
+    environment:
+      # KRaft Configuration
+      KAFKA_NODE_ID: 3
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@127.0.0.1:9093,2@127.0.0.1:9095,3@127.0.0.1:9097
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM1Tk
+
+      # Network Configuration  
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9096,CONTROLLER://0.0.0.0:9097
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9096
+
+      # Storage Configuration
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+
+      # Topic Configuration
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer

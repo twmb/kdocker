@@ -1,3 +1,6 @@
+# NOTE to test KIP-714: afka-client-metrics-to-cloudwatch-with-kip-714 repo
+
+
 services:
   zookeeper:
     image: twmb:zk-3.9.3
