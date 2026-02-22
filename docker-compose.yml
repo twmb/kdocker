@@ -1,11 +1,10 @@
-version: "3.7"
 services:
   zookeeper:
-    image: twmb:zk-3.7.0
+    image: twmb:zk-3.9.3
     network_mode: host
 
   kafka-1:
-    image: twmb:kafka-2.13-3.0.0
+    image: twmb:kafka-2.13-3.9.0
     depends_on:
       - zookeeper
     network_mode: host
@@ -17,6 +16,7 @@ services:
       KPROP_SUPER_USERS: 'User:ANONYMOUS;User:adminscram;User:adminplain'
       KPROP_AUTHORIZER_CLASS_NAME: 'kafka.security.authorizer.AclAuthorizer'
       KAFKA_OPTS: "-Djava.security.auth.login.config=/kafka/config/kafka_server_jaas.conf"
+      KPROP_TRANSACTION_PARTITION_VERIFICATION_ENABLE: false
     volumes:
       - type: bind
         source: ${PWD}/kcfg/kafka_server_jaas.conf
@@ -32,7 +32,7 @@ services:
         read_only: true
 
   kafka-2:
-    image: twmb:kafka-2.13-3.0.0
+    image: twmb:kafka-2.13-3.9.0
     depends_on:
       - zookeeper
     network_mode: host
@@ -44,6 +44,7 @@ services:
       KPROP_SUPER_USERS: 'User:ANONYMOUS;User:adminscram;User:adminplain'
       KPROP_AUTHORIZER_CLASS_NAME: 'kafka.security.authorizer.AclAuthorizer'
       KAFKA_OPTS: "-Djava.security.auth.login.config=/kafka/config/kafka_server_jaas.conf"
+      KPROP_TRANSACTION_PARTITION_VERIFICATION_ENABLE: false
     volumes:
       - type: bind
         source: ${PWD}/kcfg/kafka_server_jaas.conf
@@ -59,7 +60,7 @@ services:
         read_only: true
 
   kafka-3:
-    image: twmb:kafka-2.13-3.0.0
+    image: twmb:kafka-2.13-3.9.0
     depends_on:
       - zookeeper
     network_mode: host
@@ -71,6 +72,7 @@ services:
       KPROP_SUPER_USERS: 'User:ANONYMOUS;User:adminscram;User:adminplain'
       KPROP_AUTHORIZER_CLASS_NAME: 'kafka.security.authorizer.AclAuthorizer'
       KAFKA_OPTS: "-Djava.security.auth.login.config=/kafka/config/kafka_server_jaas.conf"
+      KPROP_TRANSACTION_PARTITION_VERIFICATION_ENABLE: false
     volumes:
       - type: bind
         source: ${PWD}/kcfg/kafka_server_jaas.conf
@@ -86,7 +88,7 @@ services:
         read_only: true
 
 #  kafka-4:
-#    image: twmb:kafka-2.13-3.0.0
+#    image: twmb:kafka-2.13-3.6.0
 #    depends_on:
 #      - zookeeper
 #    network_mode: host
@@ -113,7 +115,7 @@ services:
 #        read_only: true
 #
 #  kafka-5:
-#    image: twmb:kafka-2.13-3.0.0
+#    image: twmb:kafka-2.13-3.6.0
 #    depends_on:
 #      - zookeeper
 #    network_mode: host
