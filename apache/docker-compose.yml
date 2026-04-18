@@ -1,7 +1,36 @@
 services:
 
+#  # Single node cluster
+#  kafka:
+#    image: apache/kafka:4.2.0
+#    container_name: kafka
+#    network_mode: host
+#    environment:
+#      # KRaft Configuration
+#      KAFKA_NODE_ID: 1
+#      KAFKA_PROCESS_ROLES: broker,controller
+#      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@127.0.0.1:9093
+#      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+#      CLUSTER_ID: MkU3OEVBNTcwNTJENDM1Tk
+#
+#      # Network Configuration
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+#      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+#
+#      # Storage Configuration
+#      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+#
+#      # Topic Configuration
+#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+#      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+#      KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer,share
+
+  # Three node cluster
   kafka1:
-    image: apache/kafka:4.1.0
+    image: apache/kafka:4.2.0
     container_name: kafka1
     network_mode: host
     environment:
@@ -13,7 +42,10 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM1Tk
 
-      # Network Configuration  
+      # JVM Configuration
+      KAFKA_HEAP_OPTS: "-Xmx512m -Xms512m"
+
+      # Network Configuration
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
@@ -23,13 +55,15 @@ services:
 
       # Topic Configuration
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS: 5
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_NUM_PARTITIONS: 5
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+      KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer,share
 
 
   kafka2:
-    image: apache/kafka:4.1.0
+    image: apache/kafka:4.2.0
     container_name: kafka2
     network_mode: host
     environment:
@@ -41,7 +75,10 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM1Tk
 
-      # Network Configuration  
+      # JVM Configuration
+      KAFKA_HEAP_OPTS: "-Xmx512m -Xms512m"
+
+      # Network Configuration
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9094,CONTROLLER://0.0.0.0:9095
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9094
@@ -51,13 +88,15 @@ services:
 
       # Topic Configuration
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS: 5
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_NUM_PARTITIONS: 5
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+      KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer,share
 
 
   kafka3:
-    image: apache/kafka:4.1.0
+    image: apache/kafka:4.2.0
     container_name: kafka3
     network_mode: host
     environment:
@@ -69,7 +108,10 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM1Tk
 
-      # Network Configuration  
+      # JVM Configuration
+      KAFKA_HEAP_OPTS: "-Xmx512m -Xms512m"
+
+      # Network Configuration
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9096,CONTROLLER://0.0.0.0:9097
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9096
@@ -79,6 +121,8 @@ services:
 
       # Topic Configuration
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS: 5
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_NUM_PARTITIONS: 5
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer
+      KAFKA_GROUP_COORDINATOR_REBALANCE_PROTOCOLS: classic,consumer,share
